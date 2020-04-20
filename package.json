@@ -1,0 +1,15 @@
+{
+  "name": "line-admission-bot",
+  "version": "1.0.0",
+  "description": "LINE Bot to apply for membership of Sohosai Committee.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@line/bot-sdk": "^6.8.4",
+    "express": "^4.17.1"
+  }
+}
