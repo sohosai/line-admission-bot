@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "ngrok": "ngrok http 3000",
+    "dev": "nodemon server.js",
     "start": "node server.js"
   },
   "author": "",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "ngrok": "^3.2.7",
+    "nodemon": "^2.0.3",
     "prettier": "^2.0.4"
   }
 }
