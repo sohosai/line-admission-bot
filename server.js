@@ -36,6 +36,14 @@ async function handleEvent(event) {
       text: "こんにちは！",
     });
   }
+
+  if (event.message.text === "入会") {
+    // メッセージで返信
+    return client.replyMessage(event.replyToken, {
+      type: "text",
+      text: "入会ありがとうごさいます！",
+    });
+  }
 }
 
 app.listen(PORT);
