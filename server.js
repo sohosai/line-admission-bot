@@ -76,7 +76,7 @@ async function handleEvent(event) {
 
     return client.replyMessage(event.replyToken, {
       type: "text",
-      text: `${event.message.text["name"]} さん、${event.message.text["faculties"]} 所属ですね。`,
+      text: `${answer["name"]}さん、${answer["faculties"]} 所属ですね。`,
     });
   }
 
