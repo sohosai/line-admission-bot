@@ -83,7 +83,7 @@ async function handleEvent(event) {
           label: "はい",
           data: `${answer["name"]}さん/${answer["faculties"]} 所属`,
           displayText: "送信完了しました！入ってくださりありがとうございます！",
-        }
+        } ,
         {
           type: "postback",
           label: "いいえ",
