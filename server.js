@@ -59,11 +59,11 @@ async function handleEvent(event) {
   // 名前が記録されていないなら、入力されたメッセージは名前
   if (answer["name"] == null) {
     // 名前を記録
-    answer["name"] = event.message.name;
+    answer["name"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
       type: "text",
-      text: `${event.message.name} さんですね。次は学類を教えてください。`,
+      text: `${event.message.text} さんですね。次は学類を教えてください。`,
     });
   }
 
@@ -72,11 +72,11 @@ async function handleEvent(event) {
   // 名前が記録され学類が入力されていないなら、入力されたメッセージは学類
   if (answer["name"] != null && answer["faculties"] == null) {
     // 学類を記録
-    answer["faculties"] = event.message.faculties;
+    answer["faculties"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
       type: "text",
-      text: `${event.message.name} さん、${event.message.faculties} 所属ですね。`,
+      text: `${event.message.text["name"]} さん、${event.message.text["faculties"]} 所属ですね。`,
     });
   }
 
