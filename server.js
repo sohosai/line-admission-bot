@@ -17,6 +17,9 @@ app.post("/", line.middleware(LINE_CONFIG), (req, res) => {
   );
 });
 
+// ユーザー ID をキー、回答状況を値として、ここに保存する
+const answerStore = {};
+
 // Bot に発生したイベント（メッセージの受信など）をここで処理
 // イベントの詳細: https://developers.line.biz/ja/docs/messaging-api/receiving-messages/#webhook-event-types
 // メッセージイベントの詳細: https://developers.line.biz/ja/reference/messaging-api/#message-event
@@ -29,19 +32,38 @@ async function handleEvent(event) {
     return null;
   }
 
-  if (event.message.text === "こんにちは") {
+  // 送信してきたユーザーを判別する ID
+  const userId = event.source.userId;
+
+  if (event.message.text === "入会") {
+    // 空の回答状況を記録
+    answerStore[userId] = {};
+
     // メッセージで返信
     return client.replyMessage(event.replyToken, {
       type: "text",
-      text: "こんにちは！",
+      text: "ありがとうございます！まずは名前を入力してください。",
     });
   }
 
-  if (event.message.text === "入会") {
-    // メッセージで返信
+  // 「入会」以外のメッセージを処理
+
+  // ユーザーの回答状況
+  const answer = answerStore[userId];
+
+  // 回答状況がない(=入会手続き中じゃない)なら何もしない
+  if (answer == null) {
+    return null;
+  }
+
+  // 名前が記録されていないなら、入力されたメッセージは名前
+  if (answer["name"] == null) {
+    // 名前を記録
+    answer["name"] = event.message.text;
+
     return client.replyMessage(event.replyToken, {
       type: "text",
-      text: "入会ありがとうごさいます！",
+      text: `${event.message.text} さんですね。次は学類を教えてください。`,
     });
   }
 
