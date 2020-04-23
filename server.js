@@ -75,22 +75,8 @@ async function handleEvent(event) {
     answer["faculties"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
-      type: "confirm",
-      text: "${event.message.text} さん、${event.message.text}所属ですね。"<br>
-            "この内容でよろしければ「はい」、修正がある場合は「いいえ」を押してください",
-      actions: [
-        {
-          type: "message",
-          label: "はい",
-          text: "はい"
-        },
-        {
-          type: "message",
-          label: "いいえ",
-          text: "いいえ"
-        }
-      ]
-
+      type: "text",
+      text: `${event.message.text.name} さん、${event.message.text.faculties} 所属ですね。`,
     });
   }
 
