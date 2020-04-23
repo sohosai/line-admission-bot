@@ -68,6 +68,32 @@ async function handleEvent(event) {
   }
 
   // こんな感じで順番に聞いてく
+
+  // 名前が記録され学類が入力されていないなら、入力されたメッセージは学類
+  if (answer["name"] != null && answer["faculties"] == null) {
+    // 学類を記録
+    answer["faculties"] = event.message.text;
+
+    return client.replyMessage(event.replyToken, {
+      type: "confirm",
+      text: "${event.message.text} さん、${event.message.text}所属ですね。"<br>
+            "この内容でよろしければ「はい」、修正がある場合は「いいえ」を押してください",
+      actions: [
+        {
+          type: "message",
+          label: "はい",
+          text: "はい"
+        },
+        {
+          type: "message",
+          label: "いいえ",
+          text: "いいえ"
+        }
+      ]
+
+    });
+  }
+
 }
 
 app.listen(PORT);
