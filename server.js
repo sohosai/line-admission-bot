@@ -75,23 +75,27 @@ async function handleEvent(event) {
     answer["faculties"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
-      type: "bottons",
-      text: `${answer["name"]}さん、${answer["faculties"]} 所属で登録してよろしいですか？`,
-      actions: [
-        {
-          type: "postback",
-          label: "はい",
-          data: `${answer["name"]}さん/${answer["faculties"]} 所属`,
-          displayText: "送信完了しました！入ってくださりありがとうございます！",
-        } ,
-        {
-          type: "postback",
-          label: "いいえ",
-          data: `登録が中止されました。`,
-          displayText: "登録が中止されました。",
-        }
-      ]
+      type: "template",
+      template: {
+        type: "bottons",
+        text: `${answer["name"]}さん、${answer["faculties"]} 所属で登録してよろしいですか？`,
+        actions: [
+          {
+            type: "postback",
+            label: "はい",
+            data: `${answer["name"]}さん/${answer["faculties"]} 所属`,
+            displayText: "送信完了しました！入ってくださりありがとうございます！",
+          },
+          {
+            type: "postback",
+            label: "いいえ",
+            data: `登録が中止されました。`,
+            displayText: "登録が中止されました。",
+          }
+        ]
+      }
     });
+
   }
 
 }
