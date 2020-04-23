@@ -63,7 +63,7 @@ async function handleEvent(event) {
 
     return client.replyMessage(event.replyToken, {
       type: "text",
-      text: `${event.message.text} さんですね。次は学類を教えてください。`,
+      text: `${answer["name"]} さんですね。次は学類を教えてください。`,
     });
   }
 
@@ -75,8 +75,22 @@ async function handleEvent(event) {
     answer["faculties"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: `${answer["name"]}さん、${answer["faculties"]} 所属ですね。`,
+      type: "bottons",
+      text: `${answer["name"]}さん、${answer["faculties"]} 所属で登録してよろしいですか？`,
+      actions: [
+        {
+          type: "postback",
+          label: "はい",
+          data: `${answer["name"]}さん/${answer["faculties"]} 所属`,
+          displayText: "送信完了しました！入ってくださりありがとうございます！",
+        }
+        {
+          type: "postback",
+          label: "いいえ",
+          data: `登録が中止されました。`,
+          displayText: "登録が中止されました。",
+        }
+      ]
     });
   }
 
