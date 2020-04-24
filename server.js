@@ -95,6 +95,10 @@ async function handleEvent(event) {
           }
         ]
       }
+    })
+    .catch((e) => {
+      console.log("Error!");
+      console.log(e.originalError.response.data);
     });
 
   }
