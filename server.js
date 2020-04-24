@@ -77,19 +77,19 @@ async function handleEvent(event) {
     return client.replyMessage(event.replyToken, {
       type: "template",
       template: {
-        type: "bottons",
+        type: "buttons",
         text: `${answer["name"]}さん、${answer["faculties"]} 所属で登録してよろしいですか？`,
         actions: [
           {
             type: "postback",
             label: "はい",
-            data: ``,
+            data: `${answer["name"]}さん/${answer["faculties"]}所属`,
             displayText: "送信完了しました！入ってくださりありがとうございます！",
           },
           {
             type: "postback",
             label: "いいえ",
-            data: ``,
+            data: `登録が中止されました。`,
             displayText: "登録が中止されました。",
           }
         ]
