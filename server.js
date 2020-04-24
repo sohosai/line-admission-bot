@@ -79,6 +79,7 @@ async function handleEvent(event) {
       template: {
         type: "buttons",
         text: `${answer["name"]}さん、${answer["faculties"]} 所属で登録してよろしいですか？`,
+        altText: `${answer["name"]}さん、${answer["faculties"]} 所属で登録してよろしいですか？「はい」か「いいえ」で教えてください。`,
         actions: [
           {
             type: "postback",
