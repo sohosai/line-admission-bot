@@ -76,10 +76,9 @@ async function handleEvent(event) {
 
     return client.replyMessage(event.replyToken, {
       type: "template",
+      altText: `${answer["name"]}さん、${answer["faculties"]} 所属で登録してよろしいですか？「はい」か「いいえ」で教えてください。`,
       template: {
         type: "buttons",
-        text: `${answer["name"]}さん、${answer["faculties"]} 所属で登録してよろしいですか？`,
-        altText: `${answer["name"]}さん、${answer["faculties"]} 所属で登録してよろしいですか？「はい」か「いいえ」で教えてください。`,
         actions: [
           {
             type: "postback",
