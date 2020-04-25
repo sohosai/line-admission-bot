@@ -85,13 +85,15 @@ async function handleEvent(event) {
             type: "postback",
             label: "はい",
             data: `${answer["name"]}さん/${answer["faculties"]}所属`,
-            displayText: "送信完了しました！入ってくださりありがとうございます！",
+            displayText: "はい",
+            text:"送信完了しました！入ってくださりありがとうございます！",
           },
           {
             type: "postback",
             label: "いいえ",
             data: `登録が中止されました。`,
-            displayText: "登録が中止されました。",
+            displayText: "いいえ",
+            text: "登録が中止されました。"
           }
         ]
       }
