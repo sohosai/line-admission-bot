@@ -85,24 +85,36 @@ async function handleEvent(event) {
             type: "postback",
             label: "はい",
             data: `${answer["name"]}さん/${answer["faculties"]}所属`,
-            displayText: "はい",
-            text:"送信完了しました！入ってくださりありがとうございます！",
+            text: "はい",
           },
           {
             type: "postback",
             label: "いいえ",
             data: `登録が中止されました。`,
-            displayText: "いいえ",
-            text: "登録が中止されました。"
+            text: "いいえ"
           }
         ]
       }
     })
-    .catch((e) => {
-      console.log("Error!");
-      console.log(e.originalError.response.data);
-    });
+      .catch((e) => {
+        console.log("Error!");
+        console.log(e.originalError.response.data);
+      });
 
+  }
+
+  if (event.message.text === "はい" && answer["name"] != null && answer["faculties"] != null) {
+    return client.replyMessage(event.replyToken, {
+      type: "text",
+      text: "送信完了しました！入ってくださりありがとうございます！",
+    });
+  }
+
+  if (event.message.text === "いいえ" && answer["name"] != null && answer["faculties"] != null) {
+    return client.replyMessage(event.replyToken, {
+      type: "text",
+      text: "登録が中止されました。",
+    });
   }
 
 }
