@@ -78,6 +78,16 @@ async function handleEvent(event) {
     });
   }
 
+  if (event.message.text === "戻る" && answer["name"] != null) {
+    // 名前を記録
+    answer["name"] = null;
+
+    return client.replyMessage(event.replyToken, {
+      type: "text",
+      text: `名前を入力してください。`,
+    });
+  }
+
   //学類 faculties
   if (answer["name"] != null && answer["gender"] != null && answer["faculties"] == null) {
     // 名前を記録
