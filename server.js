@@ -64,34 +64,34 @@ async function handleEvent(event) {
       [
         {
           type: "template",
-          altText: `${answer["name"]} さんですね。\n次は性別を選択してください。\n変更したい場合は「戻る」と入力してください。`,
+          altText: `${answer["name"]}さんですね。\n次は性別を選択してください。\n変更したい場合は「戻る」と入力してください。`,
           template: {
             type: "buttons",
-            text: `${answer["name"]} さんですね。\n次は性別を選択してください。\n変更したい場合は「戻る」と入力してください。`,
+            text: `${answer["name"]}さんですね。\n次は性別を選択してください。\n変更したい場合は「戻る」と入力してください。`,
             actions: [
               {
                 type: "postback",
                 label: "男性",
                 data: "男性",
-                text:"男性",
+                text: "男性",
               },
               {
                 type: "postback",
                 label: "女性",
                 data: "女性",
-                text:"女性",
+                text: "女性",
               },
               {
                 type: "postback",
                 label: "その他",
                 data: "その他",
-                text:"その他",
+                text: "その他",
               },
               {
                 type: "postback",
                 label: "無回答",
                 data: "無回答",
-                text:"無回答",
+                text: "無回答",
               },
             ]
           }
@@ -114,7 +114,7 @@ async function handleEvent(event) {
     return client.replyMessage(event.replyToken,
       [
         {
-          type:"text",
+          type: "text",
           text: `ご回答ありがとうございます。\n次は学類を選択してください。\n変更したい場合は「戻る」と入力してください。`,
         },
         {
@@ -400,7 +400,7 @@ async function handleEvent(event) {
 
     return client.replyMessage(event.replyToken, {
       type: "text",
-      text: `${answer["faculties"]} 所属ですね。\n次は学籍番号を教えてください。\n変更したい場合は「戻る」と入力してください。`,
+      text: `${answer["faculties"]}所属ですね。\n次は学籍番号を教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
 
@@ -410,7 +410,7 @@ async function handleEvent(event) {
     return client.replyMessage(event.replyToken,
       [
         {
-          type:"text",
+          type: "text",
           text: `取り消しました。\n学類を選択してください。`,
         },
         {
@@ -655,7 +655,7 @@ async function handleEvent(event) {
 
     return client.replyMessage(event.replyToken, {
       type: "text",
-      text: `${answer["studentnumber"]} ですね。\n次はメールアドレスを教えてください。\n変更したい場合は「戻る」と入力してください。`,
+      text: `${answer["studentnumber"]}ですね。\n次はメールアドレスを教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
 
@@ -672,12 +672,93 @@ async function handleEvent(event) {
   if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] == null && event.message.text != "戻る") {
     answer["address"] = event.message.text;
 
-    return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: `${answer["address"]} ですね。\n次は希望する局を希望する順に３つ教えてください。\n変更したい場合は「戻る」と入力してください。`,
-    });
+    return client.replyMessage(event.replyToken,
+      [
+        {
+          type: "text",
+          text: `${answer["address"]}ですね。\n次は第一希望の局を選択してください。\n変更したい場合は「戻る」と入力してください。`,
+        },
+        {
+          type: "template",
+          altText: `第一希望局選択`,
+          template: {
+            type: "carousel",
+            columns: [
+              {
+                text: "1/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総務局",
+                    data: `総務局`,
+                    text: "総務局",
+                  },
+                  {
+                    type: "postback",
+                    label: "渉外局",
+                    data: `渉外局`,
+                    text: "渉外局",
+                  },
+                  {
+                    type: "postback",
+                    label: "推進局",
+                    data: `推進局`,
+                    text: "推進局",
+                  },
+                ]
+              },
+              {
+                text: "2/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総合計画局",
+                    data: `総合計画局`,
+                    text: "総合計画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "広報宣伝局",
+                    data: `広報宣伝局`,
+                    text: "広報宣伝局",
+                  },
+                  {
+                    type: "postback",
+                    label: "情報メディアシステム局",
+                    data: `情報メディアシステム局`,
+                    text: "情報メディアシステム局",
+                  },
+                ]
+              },
+              {
+                text: "3/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "ステージ管理局",
+                    data: `ステージ管理局`,
+                    text: "ステージ管理局",
+                  },
+                  {
+                    type: "postback",
+                    label: "本部企画局",
+                    data: `本部企画局`,
+                    text: "本部企画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+            ]
+          }
+        }]);
   }
-  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] == null) {
+
+
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] == null) {
     answer["address"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -686,26 +767,461 @@ async function handleEvent(event) {
     });
   }
 
-  //希望する局（第3まで） belongs
-  if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] == null && event.message.text != "戻る") {
-    answer["belongs"] = event.message.text;
+  //希望する局（3つ） belongs
+  if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] == null && event.message.text != "戻る") {
+    answer["belongs1"] = event.message.text;
+
+    return client.replyMessage(event.replyToken,
+      [
+        {
+          type: "text",
+          text: `第一希望局は${answer["belongs1"]}ですね。\n次に第二希望の局を選択してください。\n変更したい場合は「戻る」と入力してください。`,
+        },
+        {
+          type: "template",
+          altText: `第二希望局選択`,
+          template: {
+            type: "carousel",
+            columns: [
+              {
+                text: "1/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総務局",
+                    data: `総務局`,
+                    text: "総務局",
+                  },
+                  {
+                    type: "postback",
+                    label: "渉外局",
+                    data: `渉外局`,
+                    text: "渉外局",
+                  },
+                  {
+                    type: "postback",
+                    label: "推進局",
+                    data: `推進局`,
+                    text: "推進局",
+                  },
+                ]
+              },
+              {
+                text: "2/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総合計画局",
+                    data: `総合計画局`,
+                    text: "総合計画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "広報宣伝局",
+                    data: `広報宣伝局`,
+                    text: "広報宣伝局",
+                  },
+                  {
+                    type: "postback",
+                    label: "情報メディアシステム局",
+                    data: `情報メディアシステム局`,
+                    text: "情報メディアシステム局",
+                  },
+                ]
+              },
+              {
+                text: "3/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "ステージ管理局",
+                    data: `ステージ管理局`,
+                    text: "ステージ管理局",
+                  },
+                  {
+                    type: "postback",
+                    label: "本部企画局",
+                    data: `本部企画局`,
+                    text: "本部企画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+            ]
+          }
+        }]);
+  }
+
+
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] == null) {
+    answer["belongs1"] = null;
+
+    return client.replyMessage(event.replyToken,
+      [
+        {
+          type: "text",
+          text: `取り消しました。\n第一希望の局を選択してください。`,
+        },
+        {
+          type: "template",
+          altText: `第一希望局選択`,
+          template: {
+            type: "carousel",
+            columns: [
+              {
+                text: "1/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総務局",
+                    data: `総務局`,
+                    text: "総務局",
+                  },
+                  {
+                    type: "postback",
+                    label: "渉外局",
+                    data: `渉外局`,
+                    text: "渉外局",
+                  },
+                  {
+                    type: "postback",
+                    label: "推進局",
+                    data: `推進局`,
+                    text: "推進局",
+                  },
+                ]
+              },
+              {
+                text: "2/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総合計画局",
+                    data: `総合計画局`,
+                    text: "総合計画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "広報宣伝局",
+                    data: `広報宣伝局`,
+                    text: "広報宣伝局",
+                  },
+                  {
+                    type: "postback",
+                    label: "情報メディアシステム局",
+                    data: `情報メディアシステム局`,
+                    text: "情報メディアシステム局",
+                  },
+                ]
+              },
+              {
+                text: "3/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "ステージ管理局",
+                    data: `ステージ管理局`,
+                    text: "ステージ管理局",
+                  },
+                  {
+                    type: "postback",
+                    label: "本部企画局",
+                    data: `本部企画局`,
+                    text: "本部企画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+            ]
+          }
+        }]);
+  }
+
+  if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] == null && event.message.text != "戻る") {
+    answer["belongs2"] = event.message.text;
+
+    return client.replyMessage(event.replyToken,
+      [
+        {
+          type: "text",
+          text: `第二希望局は${answer["belongs2"]}ですね。\n次に第三希望の局を選択してください。\n変更したい場合は「戻る」と入力してください。`,
+        },
+        {
+          type: "template",
+          altText: `第三希望局選択`,
+          template: {
+            type: "carousel",
+            columns: [
+              {
+                text: "1/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総務局",
+                    data: `総務局`,
+                    text: "総務局",
+                  },
+                  {
+                    type: "postback",
+                    label: "渉外局",
+                    data: `渉外局`,
+                    text: "渉外局",
+                  },
+                  {
+                    type: "postback",
+                    label: "推進局",
+                    data: `推進局`,
+                    text: "推進局",
+                  },
+                ]
+              },
+              {
+                text: "2/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総合計画局",
+                    data: `総合計画局`,
+                    text: "総合計画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "広報宣伝局",
+                    data: `広報宣伝局`,
+                    text: "広報宣伝局",
+                  },
+                  {
+                    type: "postback",
+                    label: "情報メディアシステム局",
+                    data: `情報メディアシステム局`,
+                    text: "情報メディアシステム局",
+                  },
+                ]
+              },
+              {
+                text: "3/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "ステージ管理局",
+                    data: `ステージ管理局`,
+                    text: "ステージ管理局",
+                  },
+                  {
+                    type: "postback",
+                    label: "本部企画局",
+                    data: `本部企画局`,
+                    text: "本部企画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+            ]
+          }
+        }]);
+  }
+
+
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] == null) {
+    answer["belongs2"] = null;
+
+    return client.replyMessage(event.replyToken,
+      [
+        {
+          type: "text",
+          text: `取り消しました。\n第二希望の局を選択してください。`,
+        },
+        {
+          type: "template",
+          altText: `第二希望局選択`,
+          template: {
+            type: "carousel",
+            columns: [
+              {
+                text: "1/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総務局",
+                    data: `総務局`,
+                    text: "総務局",
+                  },
+                  {
+                    type: "postback",
+                    label: "渉外局",
+                    data: `渉外局`,
+                    text: "渉外局",
+                  },
+                  {
+                    type: "postback",
+                    label: "推進局",
+                    data: `推進局`,
+                    text: "推進局",
+                  },
+                ]
+              },
+              {
+                text: "2/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総合計画局",
+                    data: `総合計画局`,
+                    text: "総合計画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "広報宣伝局",
+                    data: `広報宣伝局`,
+                    text: "広報宣伝局",
+                  },
+                  {
+                    type: "postback",
+                    label: "情報メディアシステム局",
+                    data: `情報メディアシステム局`,
+                    text: "情報メディアシステム局",
+                  },
+                ]
+              },
+              {
+                text: "3/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "ステージ管理局",
+                    data: `ステージ管理局`,
+                    text: "ステージ管理局",
+                  },
+                  {
+                    type: "postback",
+                    label: "本部企画局",
+                    data: `本部企画局`,
+                    text: "本部企画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+            ]
+          }
+        }]);
+  }
+
+  if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] == null && event.message.text != "戻る") {
+    answer["belongs3"] = event.message.text;
+
 
     return client.replyMessage(event.replyToken, {
       type: "text",
-      text: `希望局は順に${answer["belongs"]} ですね。\n次に特技や資格など、アピールしたいことがあれば教えてください。\n変更したい場合は「戻る」と入力してください。`,
+      text: `希望局は順に${answer["belongs1"]}、${answer["belongs2"]}、${answer["belongs3"]}ですね。\n次に特技や資格など、アピールしたいことがあれば教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
-  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] == null) {
-    answer["belongs"] = null;
 
-    return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: `取り消しました。\n希望する局を希望する順に３つ入力してください。`,
-    });
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] != null && answer["appeal"] == null) {
+    answer["belongs3"] = null;
+
+    return client.replyMessage(event.replyToken,
+      [
+        {
+          type: "text",
+          text: `取り消しました。\n第三希望の局を選択してください。`,
+        },
+        {
+          type: "template",
+          altText: `第三希望局選択`,
+          template: {
+            type: "carousel",
+            columns: [
+              {
+                text: "1/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総務局",
+                    data: `総務局`,
+                    text: "総務局",
+                  },
+                  {
+                    type: "postback",
+                    label: "渉外局",
+                    data: `渉外局`,
+                    text: "渉外局",
+                  },
+                  {
+                    type: "postback",
+                    label: "推進局",
+                    data: `推進局`,
+                    text: "推進局",
+                  },
+                ]
+              },
+              {
+                text: "2/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "総合計画局",
+                    data: `総合計画局`,
+                    text: "総合計画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "広報宣伝局",
+                    data: `広報宣伝局`,
+                    text: "広報宣伝局",
+                  },
+                  {
+                    type: "postback",
+                    label: "情報メディアシステム局",
+                    data: `情報メディアシステム局`,
+                    text: "情報メディアシステム局",
+                  },
+                ]
+              },
+              {
+                text: "3/3",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "ステージ管理局",
+                    data: `ステージ管理局`,
+                    text: "ステージ管理局",
+                  },
+                  {
+                    type: "postback",
+                    label: "本部企画局",
+                    data: `本部企画局`,
+                    text: "本部企画局",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+            ]
+          }
+        }]);
   }
 
   //特技や資格など、アピールしたいこと appeal
-  if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] == null && event.message.text != "戻る") {
+  if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] != null && answer["appeal"] == null && event.message.text != "戻る") {
     answer["appeal"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
@@ -713,7 +1229,7 @@ async function handleEvent(event) {
       text: `了解しました。\n次はバイトや他のサークルなどを検討しているか教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
-  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] == null) {
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] != null && answer["appeal"] != null && answer["others"] == null) {
     answer["appeal"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -723,7 +1239,7 @@ async function handleEvent(event) {
   }
 
   //バイトとか他のサークルとか検討してますか others
-  if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] == null && event.message.text != "戻る") {
+  if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] != null && answer["appeal"] != null && answer["others"] == null && event.message.text != "戻る") {
     answer["others"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
@@ -731,7 +1247,7 @@ async function handleEvent(event) {
       text: `了解しました。\n最後にその他伝えたいことがあれば教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
-  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] == null) {
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] == null) {
     answer["others"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -741,13 +1257,13 @@ async function handleEvent(event) {
   }
 
   //その他伝えたいこと自由記述 free
-  if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] == null && event.message.text != "戻る") {
+  if (answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] == null && event.message.text != "戻る") {
     answer["free"] = event.message.text;
 
     return client.replyMessage(event.replyToken,
       [{
         type: "text",
-        text: `ありがとうございました。\n名前：${answer["name"]} さん\n性別：${answer["gender"]}\n所属：${answer["faculties"]} \n学籍番号：${answer["studentnumber"]}\nメールアドレス：${answer["address"]}\n所属希望局：${answer["belongs"]}\nアピール：${answer["appeal"]}\n他の検討：${answer["others"]}\nその他：${answer["free"]}\n\n変更したい場合は「戻る」と入力してください。\n※注意：「いいえ」と入力すると今までの全データが消去されます。`,
+        text: `ありがとうございました。\n名前：${answer["name"]}さん\n性別：${answer["gender"]}\n所属：${answer["faculties"]} \n学籍番号：${answer["studentnumber"]}\nメールアドレス：${answer["address"]}\n所属希望局：\n1.${answer["belongs1"]}\n2.${answer["belongs2"]}\n3.${answer["belongs3"]}\nアピール：${answer["appeal"]}\n他の検討：${answer["others"]}\nその他：${answer["free"]}\n\n変更したい場合は「戻る」と入力してください。\n※注意：「いいえ」と入力すると今までの全データが消去されます。`,
       },
       {
         type: "template",
@@ -759,7 +1275,7 @@ async function handleEvent(event) {
             {
               type: "postback",
               label: "はい",
-              data: `名前：${answer["name"]} さん、性別：${answer["gender"]}、所属：${answer["faculties"]} 、学籍番号：${answer["studentnumber"]}、メールアドレス：${answer["address"]}、所属希望局：${answer["belongs"]}、アピール：${answer["appeal"]}、他の検討：${answer["others"]}、その他：${answer["free"]}`,
+              data: `名前：${answer["name"]}、性別：${answer["gender"]}、所属：${answer["faculties"]}、学籍番号：${answer["studentnumber"]}、メールアドレス：${answer["address"]}、所属希望局：1.${answer["belongs1"]}/2.${answer["belongs2"]}/3.${answer["belongs3"]}、アピール：${answer["appeal"]}、他の検討：${answer["others"]}、その他：${answer["free"]}`,
               text: "はい",
             },
             {
@@ -778,20 +1294,22 @@ async function handleEvent(event) {
 
   }
 
-  if (event.message.text == "はい" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] != null) {
+  if (event.message.text == "はい" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] != null) {
     return client.replyMessage(event.replyToken, {
       type: "text",
       text: "送信完了しました！入ってくださりありがとうございます！",
     });
   }
 
-  if (event.message.text == "いいえ" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] != null) {
+  if (event.message.text == "いいえ" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] != null) {
     answer["name"] == null
     answer["gender"] == null
     answer["faculties"] == null
     answer["studentnumber"] == null
     answer["address"] == null
-    answer["belongs"] == null
+    answer["belongs1"] == null
+    answer["belongs2"] == null
+    answer["belongs3"] == null
     answer["appeal"] == null
     answer["others"] == null
     answer["free"] == null
@@ -802,7 +1320,7 @@ async function handleEvent(event) {
     });
   }
 
-  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] != null) {
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs1"] != null && answer["belongs2"] != null && answer["belongs3"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] != null) {
     answer["free"] = null;
 
     return client.replyMessage(event.replyToken, {
