@@ -58,13 +58,44 @@ async function handleEvent(event) {
 
   // 名前が記録されていないなら、入力されたメッセージは名前
   if (answer["name"] == null) {
-    // 名前を記録
     answer["name"] = event.message.text;
 
-    return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: `${answer["name"]} さんですね。\n次は性別を教えてください。\n変更したい場合は「戻る」と入力してください。`,
-    });
+    return client.replyMessage(event.replyToken,
+      [
+        {
+          type: "template",
+          altText: `${answer["name"]} さんですね。\n次は性別を選択してください。\n変更したい場合は「戻る」と入力してください。`,
+          template: {
+            type: "buttons",
+            text: `${answer["name"]} さんですね。\n次は性別を選択してください。\n変更したい場合は「戻る」と入力してください。`,
+            actions: [
+              {
+                type: "postback",
+                label: "男性",
+                data: "男性",
+                text:"男性",
+              },
+              {
+                type: "postback",
+                label: "女性",
+                data: "女性",
+                text:"女性",
+              },
+              {
+                type: "postback",
+                label: "その他",
+                data: "その他",
+                text:"その他",
+              },
+              {
+                type: "postback",
+                label: "無回答",
+                data: "無回答",
+                text:"無回答",
+              },
+            ]
+          }
+        }]);
   }
 
   if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] == null) {
@@ -80,19 +111,287 @@ async function handleEvent(event) {
   if (answer["name"] != null && answer["gender"] == null && event.message.text != "戻る") {
     answer["gender"] = event.message.text;
 
-    return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: `ご回答ありがとうございます。\n次は学類を教えてください。\n変更したい場合は「戻る」と入力してください。`,
-    });
+    return client.replyMessage(event.replyToken,
+      [
+        {
+          type:"text",
+          text: `ご回答ありがとうございます。\n次は学類を選択してください。\n変更したい場合は「戻る」と入力してください。`,
+        },
+        {
+          type: "template",
+          altText: `学類選択`,
+          template: {
+            type: "carousel",
+            columns: [
+              {
+                text: "人文・文化学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "人文学類",
+                    data: `人文学類`,
+                    text: "人文学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "比較文化学類",
+                    data: `比較文化学類`,
+                    text: "比較文化学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "日本語・日本文化学類",
+                    data: `日本語・日本文化学類`,
+                    text: "日本語・日本文化学類",
+                  },
+                ]
+              },
+              {
+                text: "社会・国際学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "社会学類",
+                    data: `社会学類`,
+                    text: "社会学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "国際総合学類",
+                    data: `国際総合学類`,
+                    text: "国際総合学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+              {
+                text: "人間学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "教育学類",
+                    data: `教育学類`,
+                    text: "教育学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "心理学類",
+                    data: `心理学類`,
+                    text: "心理学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "障害科学類",
+                    data: `障害科学類`,
+                    text: "障害科学類",
+                  },
+                ]
+              },
+              {
+                text: "生命環境学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "生物学類",
+                    data: `生物学類`,
+                    text: "生物学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "生物資源学類",
+                    data: `生物資源学類`,
+                    text: "生物資源学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "地球学類",
+                    data: `地球学類`,
+                    text: "地球学類",
+                  },
+                ]
+              },
+              {
+                text: "理工学群①",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "数学類",
+                    data: `数学類`,
+                    text: "数学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "物理学類",
+                    data: `物理学類`,
+                    text: "物理学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "化学類",
+                    data: `化学類`,
+                    text: "化学類",
+                  },
+                ]
+              },
+              {
+                text: "理工学群②",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "応用理工学類",
+                    data: `応用理工学類`,
+                    text: "応用理工学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "工学システム学類",
+                    data: `工学システム学類`,
+                    text: "工学システム学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "社会工学類",
+                    data: `社会工学類`,
+                    text: "社会工学類",
+                  },
+                ]
+              },
+              {
+                text: "情報学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "情報科学類",
+                    data: `情報科学類`,
+                    text: "情報科学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "情報メディア創成学類",
+                    data: `情報メディア創成学類`,
+                    text: "情報メディア創成学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "知識情報・図書館学類",
+                    data: `知識情報・図書館学類`,
+                    text: "知識情報・図書館学類",
+                  },
+                ]
+              },
+              {
+                text: "医学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "医学類",
+                    data: `医学類`,
+                    text: "医学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "看護学類",
+                    data: `看護学類`,
+                    text: "看護学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "医療科学類",
+                    data: `医療科学類`,
+                    text: "医療科学類",
+                  },
+                ]
+              },
+              {
+                text: "体育専門学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "体育専門学群",
+                    data: `体育専門学群`,
+                    text: "体育専門学群",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+              {
+                text: "芸術専門学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "芸術専門学群",
+                    data: `芸術専門学群`,
+                    text: "芸術専門学群",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+            ]
+          }
+        }]);
   }
 
   if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] == null) {
     answer["gender"] = null;
 
-    return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: `取り消しました。\n性別を入力してください。`,
-    });
+    return client.replyMessage(event.replyToken,
+      [
+        {
+          type: "template",
+          altText: `取り消しました。\n性別を選択してください。`,
+          template: {
+            type: "buttons",
+            text: `取り消しました。\n性別を選択してください。`,
+            actions: [
+              {
+                type: "postback",
+                label: "男性",
+                data: `男性`,
+                text: "男性",
+              },
+              {
+                type: "postback",
+                label: "女性",
+                data: `女性`,
+                text: "女性"
+              },
+              {
+                type: "postback",
+                label: "その他",
+                data: `その他`,
+                text: "その他",
+              },
+              {
+                type: "postback",
+                label: "無回答",
+                data: `無回答`,
+                text: "無回答",
+              },
+            ]
+          }
+        }]);
   }
 
   //学類 faculties
@@ -108,10 +407,246 @@ async function handleEvent(event) {
   if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] == null) {
     answer["faculties"] = null;
 
-    return client.replyMessage(event.replyToken, {
-      type: "text",
-      text: `取り消しました。\n学類を入力してください。`,
-    });
+    return client.replyMessage(event.replyToken,
+      [
+        {
+          type:"text",
+          text: `取り消しました。\n学類を選択してください。`,
+        },
+        {
+          type: "template",
+          altText: `学類選択`,
+          template: {
+            type: "carousel",
+            columns: [
+              {
+                text: "人文・文化学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "人文学類",
+                    data: `人文学類`,
+                    text: "人文学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "比較文化学類",
+                    data: `比較文化学類`,
+                    text: "比較文化学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "日本語・日本文化学類",
+                    data: `日本語・日本文化学類`,
+                    text: "日本語・日本文化学類",
+                  },
+                ]
+              },
+              {
+                text: "社会・国際学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "社会学類",
+                    data: `社会学類`,
+                    text: "社会学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "国際総合学類",
+                    data: `国際総合学類`,
+                    text: "国際総合学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+              {
+                text: "人間学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "教育学類",
+                    data: `教育学類`,
+                    text: "教育学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "心理学類",
+                    data: `心理学類`,
+                    text: "心理学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "障害科学類",
+                    data: `障害科学類`,
+                    text: "障害科学類",
+                  },
+                ]
+              },
+              {
+                text: "生命環境学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "生物学類",
+                    data: `生物学類`,
+                    text: "生物学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "生物資源学類",
+                    data: `生物資源学類`,
+                    text: "生物資源学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "地球学類",
+                    data: `地球学類`,
+                    text: "地球学類",
+                  },
+                ]
+              },
+              {
+                text: "理工学群①",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "数学類",
+                    data: `数学類`,
+                    text: "数学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "物理学類",
+                    data: `物理学類`,
+                    text: "物理学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "化学類",
+                    data: `化学類`,
+                    text: "化学類",
+                  },
+                ]
+              },
+              {
+                text: "理工学群②",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "応用理工学類",
+                    data: `応用理工学類`,
+                    text: "応用理工学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "工学システム学類",
+                    data: `工学システム学類`,
+                    text: "工学システム学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "社会工学類",
+                    data: `社会工学類`,
+                    text: "社会工学類",
+                  },
+                ]
+              },
+              {
+                text: "情報学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "情報科学類",
+                    data: `情報科学類`,
+                    text: "情報科学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "情報メディア創成学類",
+                    data: `情報メディア創成学類`,
+                    text: "情報メディア創成学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "知識情報・図書館学類",
+                    data: `知識情報・図書館学類`,
+                    text: "知識情報・図書館学類",
+                  },
+                ]
+              },
+              {
+                text: "医学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "医学類",
+                    data: `医学類`,
+                    text: "医学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "看護学類",
+                    data: `看護学類`,
+                    text: "看護学類",
+                  },
+                  {
+                    type: "postback",
+                    label: "医療科学類",
+                    data: `医療科学類`,
+                    text: "医療科学類",
+                  },
+                ]
+              },
+              {
+                text: "体育専門学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "体育専門学群",
+                    data: `体育専門学群`,
+                    text: "体育専門学群",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+              {
+                text: "芸術専門学群",
+                actions: [
+                  {
+                    type: "postback",
+                    label: "芸術専門学群",
+                    data: `芸術専門学群`,
+                    text: "芸術専門学群",
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                  {
+                    type: "postback",
+                    label: "　",
+                    data: `　`,
+                  },
+                ]
+              },
+            ]
+          }
+        }]);
   }
 
   //学籍番号 studentnumber
@@ -142,7 +677,7 @@ async function handleEvent(event) {
       text: `${answer["address"]} ですね。\n次は希望する局を希望する順に３つ教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
-  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null  && answer["belongs"] == null) {
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] == null) {
     answer["address"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -160,7 +695,7 @@ async function handleEvent(event) {
       text: `希望局は順に${answer["belongs"]} ですね。\n次に特技や資格など、アピールしたいことがあれば教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
-  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null  && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] == null) {
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] == null) {
     answer["belongs"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -178,7 +713,7 @@ async function handleEvent(event) {
       text: `了解しました。\n次はバイトや他のサークルなどを検討しているか教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
-  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null  && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] == null) {
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] == null) {
     answer["appeal"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -196,7 +731,7 @@ async function handleEvent(event) {
       text: `了解しました。\n最後にその他伝えたいことがあれば教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
-  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null  && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] == null) {
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] == null) {
     answer["others"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -218,7 +753,7 @@ async function handleEvent(event) {
         type: "template",
         altText: `以上の内容で登録してよろしいですか？「はい」か「いいえ」で教えてください。`,
         template: {
-          type: "buttons",
+          type: "confirm",
           text: `以上の内容で登録してよろしいですか？「はい」か「いいえ」で教えてください。`,
           actions: [
             {
@@ -260,14 +795,14 @@ async function handleEvent(event) {
     answer["appeal"] == null
     answer["others"] == null
     answer["free"] == null
-    
+
     return client.replyMessage(event.replyToken, {
       type: "text",
       text: "登録が中止されました。",
     });
   }
 
-  if (event.message.text == "戻る" && answer["name"] != null&& answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] != null) {
+  if (event.message.text == "戻る" && answer["name"] != null && answer["gender"] != null && answer["faculties"] != null && answer["studentnumber"] != null && answer["address"] != null && answer["belongs"] != null && answer["appeal"] != null && answer["others"] != null && answer["free"] != null) {
     answer["free"] = null;
 
     return client.replyMessage(event.replyToken, {
