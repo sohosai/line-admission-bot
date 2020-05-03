@@ -98,11 +98,7 @@ async function handleEvent(event) {
     ]);
   }
 
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] == null
-  ) {
+  if (event.message.text == "戻る" && answer["gender"] == null) {
     answer["name"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -112,11 +108,7 @@ async function handleEvent(event) {
   }
 
   //性別 gender
-  if (
-    answer["name"] != null &&
-    answer["gender"] == null &&
-    event.message.text != "戻る"
-  ) {
+  if (answer["gender"] == null) {
     answer["gender"] = event.message.text;
 
     return client.replyMessage(event.replyToken, [
@@ -361,12 +353,7 @@ async function handleEvent(event) {
     ]);
   }
 
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] == null
-  ) {
+  if (event.message.text == "戻る" && answer["faculties"] == null) {
     answer["gender"] = null;
 
     return client.replyMessage(event.replyToken, [
@@ -408,12 +395,7 @@ async function handleEvent(event) {
   }
 
   //学類 faculties
-  if (
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] == null &&
-    event.message.text != "戻る"
-  ) {
+  if (answer["faculties"] == null) {
     answer["faculties"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
@@ -422,13 +404,7 @@ async function handleEvent(event) {
     });
   }
 
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] == null
-  ) {
+  if (event.message.text == "戻る" && answer["studentnumber"] == null) {
     answer["faculties"] = null;
 
     return client.replyMessage(event.replyToken, [
@@ -674,13 +650,7 @@ async function handleEvent(event) {
   }
 
   //学籍番号 studentnumber
-  if (
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] == null &&
-    event.message.text != "戻る"
-  ) {
+  if (answer["studentnumber"] == null) {
     answer["studentnumber"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
@@ -689,14 +659,7 @@ async function handleEvent(event) {
     });
   }
 
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] == null
-  ) {
+  if (event.message.text == "戻る" && answer["address"] == null) {
     answer["studentnumber"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -706,14 +669,7 @@ async function handleEvent(event) {
   }
 
   //メアド  address
-  if (
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] == null &&
-    event.message.text != "戻る"
-  ) {
+  if (answer["address"] == null) {
     answer["address"] = event.message.text;
 
     return client.replyMessage(event.replyToken, [
@@ -801,15 +757,7 @@ async function handleEvent(event) {
     ]);
   }
 
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] == null
-  ) {
+  if (event.message.text == "戻る" && answer["belongs1"] == null) {
     answer["address"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -819,15 +767,7 @@ async function handleEvent(event) {
   }
 
   //希望する局（3つ） belongs
-  if (
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] == null &&
-    event.message.text != "戻る"
-  ) {
+  if (answer["belongs1"] == null) {
     answer["belongs1"] = event.message.text;
 
     return client.replyMessage(event.replyToken, [
@@ -915,16 +855,7 @@ async function handleEvent(event) {
     ]);
   }
 
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] == null
-  ) {
+  if (event.message.text == "戻る" && answer["belongs2"] == null) {
     answer["belongs1"] = null;
 
     return client.replyMessage(event.replyToken, [
@@ -1012,16 +943,7 @@ async function handleEvent(event) {
     ]);
   }
 
-  if (
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] == null &&
-    event.message.text != "戻る"
-  ) {
+  if (answer["belongs2"] == null) {
     answer["belongs2"] = event.message.text;
 
     return client.replyMessage(event.replyToken, [
@@ -1109,17 +1031,7 @@ async function handleEvent(event) {
     ]);
   }
 
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] == null
-  ) {
+  if (event.message.text == "戻る" && answer["belongs3"] == null) {
     answer["belongs2"] = null;
 
     return client.replyMessage(event.replyToken, [
@@ -1207,17 +1119,7 @@ async function handleEvent(event) {
     ]);
   }
 
-  if (
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] == null &&
-    event.message.text != "戻る"
-  ) {
+  if (answer["belongs3"] == null) {
     answer["belongs3"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
@@ -1226,18 +1128,7 @@ async function handleEvent(event) {
     });
   }
 
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] != null &&
-    answer["appeal"] == null
-  ) {
+  if (event.message.text == "戻る" && answer["appeal"] == null) {
     answer["belongs3"] = null;
 
     return client.replyMessage(event.replyToken, [
@@ -1326,18 +1217,7 @@ async function handleEvent(event) {
   }
 
   //特技や資格など、アピールしたいこと appeal
-  if (
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] != null &&
-    answer["appeal"] == null &&
-    event.message.text != "戻る"
-  ) {
+  if (answer["appeal"] == null) {
     answer["appeal"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
@@ -1345,19 +1225,7 @@ async function handleEvent(event) {
       text: `了解しました。\n次はバイトや他のサークルなどを検討しているか教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] != null &&
-    answer["appeal"] != null &&
-    answer["others"] == null
-  ) {
+  if (event.message.text == "戻る" && answer["others"] == null) {
     answer["appeal"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -1367,19 +1235,7 @@ async function handleEvent(event) {
   }
 
   //バイトとか他のサークルとか検討してますか others
-  if (
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] != null &&
-    answer["appeal"] != null &&
-    answer["others"] == null &&
-    event.message.text != "戻る"
-  ) {
+  if (answer["others"] == null) {
     answer["others"] = event.message.text;
 
     return client.replyMessage(event.replyToken, {
@@ -1387,20 +1243,7 @@ async function handleEvent(event) {
       text: `了解しました。\n最後にその他伝えたいことがあれば教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   }
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] != null &&
-    answer["appeal"] != null &&
-    answer["others"] != null &&
-    answer["free"] == null
-  ) {
+  if (event.message.text == "戻る" && answer["free"] == null) {
     answer["others"] = null;
 
     return client.replyMessage(event.replyToken, {
@@ -1410,20 +1253,7 @@ async function handleEvent(event) {
   }
 
   //その他伝えたいこと自由記述 free
-  if (
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] != null &&
-    answer["appeal"] != null &&
-    answer["others"] != null &&
-    answer["free"] == null &&
-    event.message.text != "戻る"
-  ) {
+  if (answer["free"] == null) {
     answer["free"] = event.message.text;
 
     return client
@@ -1461,40 +1291,14 @@ async function handleEvent(event) {
       });
   }
 
-  if (
-    event.message.text == "はい" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] != null &&
-    answer["appeal"] != null &&
-    answer["others"] != null &&
-    answer["free"] != null
-  ) {
+  if (event.message.text == "はい") {
     return client.replyMessage(event.replyToken, {
       type: "text",
       text: "送信完了しました！入ってくださりありがとうございます！",
     });
   }
 
-  if (
-    event.message.text == "いいえ" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] != null &&
-    answer["appeal"] != null &&
-    answer["others"] != null &&
-    answer["free"] != null
-  ) {
+  if (event.message.text == "いいえ") {
     answer["name"] == null;
     answer["gender"] == null;
     answer["faculties"] == null;
@@ -1513,20 +1317,7 @@ async function handleEvent(event) {
     });
   }
 
-  if (
-    event.message.text == "戻る" &&
-    answer["name"] != null &&
-    answer["gender"] != null &&
-    answer["faculties"] != null &&
-    answer["studentnumber"] != null &&
-    answer["address"] != null &&
-    answer["belongs1"] != null &&
-    answer["belongs2"] != null &&
-    answer["belongs3"] != null &&
-    answer["appeal"] != null &&
-    answer["others"] != null &&
-    answer["free"] != null
-  ) {
+  if (event.message.text == "戻る") {
     answer["free"] = null;
 
     return client.replyMessage(event.replyToken, {
