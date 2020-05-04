@@ -6,14 +6,16 @@
   "scripts": {
     "ngrok": "ngrok http 3000",
     "dev": "nodemon server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "format": "prettier '*.js' --write"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@line/bot-sdk": "^6.8.4",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^3.5.7"
   },
   "devDependencies": {
     "ngrok": "^3.2.7",

@@ -1,5 +1,6 @@
 const express = require("express");
 const line = require("@line/bot-sdk");
+const { saveAnswer } = require("./database.js");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 3000;
@@ -73,8 +74,6 @@ async function handleEvent(event) {
   if (answer == null) {
     return null;
   }
-
-  console.log(answer.currentQuestionIndex);
 
   if (text === "戻る" || text === "もどる") {
     if (answer.currentQuestionIndex > 0) {
@@ -680,8 +679,9 @@ async function handleEvent(event) {
         console.log("Error!");
         console.log(e.originalError.response.data);
       });
-  } else if (questionId === "done") {
+  } else {
     if (event.message.text == "はい") {
+      await saveAnswer(userId, answer);
       return await client.replyMessage(event.replyToken, {
         type: "text",
         text: "送信完了しました！入ってくださりありがとうございます！",
