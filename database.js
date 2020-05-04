@@ -7,17 +7,31 @@ const HOST = process.env.DATABASE_HOST;
 const PORT = process.env.DATABASE_PORT;
 const NAME = process.env.DATABASE_NAME;
 
-async function saveAnswer(userId, answer) {
+let database;
+(async function () {
   const client = await MongoClient.connect(
     `mongodb://${USERNAME}:${PASSWORD}@${HOST}:${PORT}`,
     { useUnifiedTopology: true }
   );
+  database = client.db(NAME);
+})();
 
-  const database = client.db(NAME);
+async function saveAnswer(userId, answer) {
   await database.collection("answers").insertOne({
     userId: userId,
     ...answer,
   });
 }
 
-module.exports.saveAnswer = saveAnswer;
+async function isAlreadyAnswered(userId) {
+  const result = await database.collection("answers").findOne({
+    userId: userId,
+  });
+
+  return result != null;
+}
+
+module.exports = {
+  saveAnswer,
+  isAlreadyAnswered,
+};

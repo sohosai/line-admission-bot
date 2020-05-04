@@ -1,6 +1,6 @@
 const express = require("express");
 const line = require("@line/bot-sdk");
-const { saveAnswer } = require("./database.js");
+const { saveAnswer, isAlreadyAnswered } = require("./database.js");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 3000;
@@ -52,6 +52,14 @@ async function handleEvent(event) {
   const userId = event.source.userId;
 
   if (event.message.text == "入会") {
+    const answered = await isAlreadyAnswered(userId);
+    if (answered) {
+      return client.replyMessage(event.replyToken, {
+        type: "text",
+        text:
+          "すでに入会申請を受け付けています。追ってご連絡しますのでお待ちください！",
+      });
+    }
     // 空の回答状況を記録
     answerStore[userId] = {
       currentQuestionIndex: 0,
