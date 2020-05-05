@@ -10,7 +10,7 @@ const NAME = process.env.DATABASE_NAME;
 let database;
 (async function () {
   const client = await MongoClient.connect(
-    `mongodb://${USERNAME}:${PASSWORD}@${HOST}:${PORT}`,
+    `mongodb://${USERNAME}:${PASSWORD}@${HOST}:${PORT}/?authSource=admin`,
     { useUnifiedTopology: true }
   );
   database = client.db(NAME);
