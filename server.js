@@ -1,6 +1,7 @@
 const express = require("express");
 const line = require("@line/bot-sdk");
 const { saveAnswer, isAlreadyAnswered } = require("./database.js");
+const { validateEmail, validateStudentNumber } = require("./validator.js");
 
 require("dotenv").config();
 const PORT = process.env.PORT || 3000;
@@ -382,11 +383,29 @@ async function handleEvent(event) {
       text: `${answer.faculity}所属ですね。\n次は学籍番号を教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   } else if (questionId === "email") {
+    if (!validateStudentNumber(answer.studentNumber)) {
+      answer.currentQuestionIndex -= 1;
+      await client.replyMessage(event.replyToken, [
+        {
+          type: "text",
+          text: `無効な学籍番号です。20から始まる9桁の学籍番号を入力してください。`,
+        },
+      ]);
+    }
     await client.replyMessage(event.replyToken, {
       type: "text",
       text: `${answer.studentNumber}ですね。\n次はメールアドレスを教えてください。\n変更したい場合は「戻る」と入力してください。`,
     });
   } else if (questionId === "firstChoice") {
+    if (!validateEmail(answer.email)) {
+      answer.currentQuestionIndex -= 1;
+      await client.replyMessage(event.replyToken, [
+        {
+          type: "text",
+          text: `無効なメールアドレスです。正しいメールアドレスを入力してください。`,
+        },
+      ]);
+    }
     await client.replyMessage(event.replyToken, [
       {
         type: "text",
