@@ -10,4 +10,5 @@ function validateStudentNumber(number) {
 
 module.exports = {
   validateEmail,
+  validateStudentNumber,
 };

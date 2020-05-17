@@ -97,7 +97,7 @@ async function handleEvent(event) {
   if (questionId === "name") {
     await client.replyMessage(event.replyToken, {
       type: "text",
-      text: "まずは名前を入力してください。",
+      text: "まずは名前をフルネームで入力してください。",
     });
   } else if (questionId === "gender") {
     await client.replyMessage(event.replyToken, [
